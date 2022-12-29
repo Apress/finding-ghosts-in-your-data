@@ -1,0 +1,1521 @@
+{
+	"info": {
+		"_postman_id": "d7742693-9082-4538-bb74-f9dcf97089ee",
+		"name": "Finding Ghosts in Your Data",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Ch04",
+			"item": [
+				{
+					"name": "Ch04 - Univariate - Debug",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200: \" + pm.response.code, function () { pm.expect(pm.response.code).to.eql(200); });\r",
+									"pm.test(\"Response time is acceptable (range 5ms to 7000ms): \" + pm.response.responseTime + \"ms\", function () { pm.expect(_.inRange(pm.response.responseTime, 5, 7000)).to.eql(true); });\r",
+									"var body = JSON.parse(responseBody);\r",
+									"pm.test(\"Number of items returned is correct (eq 2): \" + body[\"anomalies\"].length, function () { pm.expect(body[\"anomalies\"].length).to.eql(2); });\r",
+									"pm.test(\"Debugging is enabled (debug_details exists):  \" + body[\"debug_details\"], function () { pm.expect(body[\"debug_details\"].exist); });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n{\"key\": \"string\",\"value\": 0},\r\n{\"key\": \"something\", \"value\": 0.37}\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/detect/univariate?debug=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"detect",
+								"univariate"
+							],
+							"query": [
+								{
+									"key": "debug",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ch04 - Univariate - NoDebug",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200: \" + pm.response.code, function () { pm.expect(pm.response.code).to.eql(200); });\r",
+									"pm.test(\"Response time is acceptable (range 5ms to 7000ms): \" + pm.response.responseTime + \"ms\", function () { pm.expect(_.inRange(pm.response.responseTime, 5, 7000)).to.eql(true); });\r",
+									"var body = JSON.parse(responseBody);\r",
+									"pm.test(\"Number of items returned is correct (eq 2): \" + body[\"anomalies\"].length, function () { pm.expect(body[\"anomalies\"].length).to.eql(2); });\r",
+									"pm.test(\"Debugging is not enabled (debug_details does not exist).\", function () { pm.expect(body[\"debug_details\"]).undefined; });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n{\"key\": \"string\",\"value\": 0},\r\n{\"key\": \"something\", \"value\": 0.37}\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/detect/univariate?debug=false",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"detect",
+								"univariate"
+							],
+							"query": [
+								{
+									"key": "debug",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ch04 - Multivariate - Debug",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200: \" + pm.response.code, function () { pm.expect(pm.response.code).to.eql(200); });\r",
+									"pm.test(\"Response time is acceptable (range 5ms to 7000ms): \" + pm.response.responseTime + \"ms\", function () { pm.expect(_.inRange(pm.response.responseTime, 5, 7000)).to.eql(true); });\r",
+									"var body = JSON.parse(responseBody);\r",
+									"pm.test(\"Number of items returned is correct (eq 2): \" + body[\"anomalies\"].length, function () { pm.expect(body[\"anomalies\"].length).to.eql(2); });\r",
+									"pm.test(\"Debugging is enabled (debug_details exists):  \" + body[\"debug_details\"], function () { pm.expect(body[\"debug_details\"].exist); });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n{\"key\": \"string\",\"vals\": [0,0,0,0,0]},\r\n{\"key\": \"something\", \"vals\": [0.37,0.49,0.99,0.27,0.0001]}\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/detect/multivariate?debug=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"detect",
+								"multivariate"
+							],
+							"query": [
+								{
+									"key": "debug",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ch04 - Multivariate - NoDebug",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200: \" + pm.response.code, function () { pm.expect(pm.response.code).to.eql(200); });\r",
+									"pm.test(\"Response time is acceptable (range 5ms to 7000ms): \" + pm.response.responseTime + \"ms\", function () { pm.expect(_.inRange(pm.response.responseTime, 5, 7000)).to.eql(true); });\r",
+									"var body = JSON.parse(responseBody);\r",
+									"pm.test(\"Number of items returned is correct (eq 2): \" + body[\"anomalies\"].length, function () { pm.expect(body[\"anomalies\"].length).to.eql(2); });\r",
+									"pm.test(\"Debugging is not enabled (debug_details does not exist).\", function () { pm.expect(body[\"debug_details\"]).undefined; });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n{\"key\": \"string\",\"vals\": [0,0,0,0,0]},\r\n{\"key\": \"something\", \"vals\": [0.37,0.49,0.99,0.27,0.0001]}\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/detect/multivariate?debug=false",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"detect",
+								"multivariate"
+							],
+							"query": [
+								{
+									"key": "debug",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ch04 - TimeSeries - Debug",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200: \" + pm.response.code, function () { pm.expect(pm.response.code).to.eql(200); });\r",
+									"pm.test(\"Response time is acceptable (range 5ms to 7000ms): \" + pm.response.responseTime + \"ms\", function () { pm.expect(_.inRange(pm.response.responseTime, 5, 7000)).to.eql(true); });\r",
+									"var body = JSON.parse(responseBody);\r",
+									"pm.test(\"Number of items returned is correct (eq 2): \" + body[\"anomalies\"].length, function () { pm.expect(body[\"anomalies\"].length).to.eql(2); });\r",
+									"pm.test(\"Debugging is enabled (debug_details exists):  \" + body[\"debug_details\"], function () { pm.expect(body[\"debug_details\"].exist); });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n{\"key\": \"string\", \"dt\":\"2019-11-01 11:00:00\",\"value\": 0.0},\r\n{\"key\": \"something\", \"dt\":\"2019-11-01 11:05:00\", \"value\": 0.37}\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/detect/timeseries/single?debug=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"detect",
+								"timeseries",
+								"single"
+							],
+							"query": [
+								{
+									"key": "debug",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ch04 - TimeSeries - NoDebug",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200: \" + pm.response.code, function () { pm.expect(pm.response.code).to.eql(200); });\r",
+									"pm.test(\"Response time is acceptable (range 5ms to 7000ms): \" + pm.response.responseTime + \"ms\", function () { pm.expect(_.inRange(pm.response.responseTime, 5, 7000)).to.eql(true); });\r",
+									"var body = JSON.parse(responseBody);\r",
+									"pm.test(\"Number of items returned is correct (eq 2): \" + body[\"anomalies\"].length, function () { pm.expect(body[\"anomalies\"].length).to.eql(2); });\r",
+									"pm.test(\"Debugging is not enabled (debug_details does not exist).\", function () { pm.expect(body[\"debug_details\"]).undefined; });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n{\"key\": \"string\", \"dt\":\"2019-11-01 11:00:00\",\"value\": 0.0},\r\n{\"key\": \"something\", \"dt\":\"2019-11-01 11:05:00\", \"value\": 0.37}\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/detect/timeseries/single?debug=false",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"detect",
+								"timeseries",
+								"single"
+							],
+							"query": [
+								{
+									"key": "debug",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ch04 - TimeSeriesMultiple - Debug",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200: \" + pm.response.code, function () { pm.expect(pm.response.code).to.eql(200); });\r",
+									"pm.test(\"Response time is acceptable (range 5ms to 7000ms): \" + pm.response.responseTime + \"ms\", function () { pm.expect(_.inRange(pm.response.responseTime, 5, 7000)).to.eql(true); });\r",
+									"var body = JSON.parse(responseBody);\r",
+									"pm.test(\"Number of items returned is correct (eq 2): \" + body[\"anomalies\"].length, function () { pm.expect(body[\"anomalies\"].length).to.eql(2); });\r",
+									"pm.test(\"Debugging is enabled (debug_details exists):  \" + body[\"debug_details\"], function () { pm.expect(body[\"debug_details\"].exist); });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n{\"key\": \"string\", \"series_key\":\"1\", \"dt\":\"2019-11-01 11:00:00\",\"value\": 0},\r\n{\"key\": \"something\", \"series_key\":\"1\", \"dt\":\"2019-11-01 11:05:00\", \"value\": 0.37}\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/detect/timeseries/multiple?debug=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"detect",
+								"timeseries",
+								"multiple"
+							],
+							"query": [
+								{
+									"key": "debug",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ch04 - TimeSeriesMultiple - NoDebug",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200: \" + pm.response.code, function () { pm.expect(pm.response.code).to.eql(200); });\r",
+									"pm.test(\"Response time is acceptable (range 5ms to 7000ms): \" + pm.response.responseTime + \"ms\", function () { pm.expect(_.inRange(pm.response.responseTime, 5, 7000)).to.eql(true); });\r",
+									"var body = JSON.parse(responseBody);\r",
+									"pm.test(\"Number of items returned is correct (eq 2): \" + body[\"anomalies\"].length, function () { pm.expect(body[\"anomalies\"].length).to.eql(2); });\r",
+									"pm.test(\"Debugging is not enabled (debug_details does not exist).\", function () { pm.expect(body[\"debug_details\"]).undefined; });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n{\"key\": \"string\", \"series_key\":\"1\", \"dt\":\"2019-11-01 11:00:00\",\"value\": 0},\r\n{\"key\": \"something\", \"series_key\":\"1\", \"dt\":\"2019-11-01 11:05:00\", \"value\": 0.37}\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/detect/timeseries/multiple?debug=false",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"detect",
+								"timeseries",
+								"multiple"
+							],
+							"query": [
+								{
+									"key": "debug",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ch06",
+			"item": [
+				{
+					"name": "Ch06 - Univariate - Default Parameters",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200: \" + pm.response.code, function () { pm.expect(pm.response.code).to.eql(200); });\r",
+									"pm.test(\"Response time is acceptable (range 5ms to 7000ms): \" + pm.response.responseTime + \"ms\", function () { pm.expect(_.inRange(pm.response.responseTime, 5, 7000)).to.eql(true); });\r",
+									"var body = JSON.parse(responseBody);\r",
+									"pm.test(\"Number of items returned is correct (eq 17): \" + body[\"anomalies\"].length, function () { pm.expect(body[\"anomalies\"].length).to.eql(17); });\r",
+									"pm.test(\"Debugging is enabled (debug_details exists):  \" + body[\"debug_details\"], function () { pm.expect(body[\"debug_details\"].exist); });\r",
+									"pm.test(\"Count of anomalies is correct (eq 2)\", () => {\r",
+									"    let anomalies = body[\"anomalies\"].filter(a => a.is_anomaly === true);\r",
+									"    pm.expect(anomalies.length).to.eql(2);\r",
+									"} );"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n{\"key\": \"1\",\"value\": 1},\r\n{\"key\": \"2\", \"value\": 1},\r\n{\"key\": \"3\", \"value\": 2},\r\n{\"key\": \"4\", \"value\": 2},\r\n{\"key\": \"5\", \"value\": 3},\r\n{\"key\": \"6\", \"value\": 3},\r\n{\"key\": \"7\", \"value\": 4},\r\n{\"key\": \"8\", \"value\": 4},\r\n{\"key\": \"9\", \"value\": 5},\r\n{\"key\": \"10\", \"value\": 5},\r\n{\"key\": \"11\", \"value\": 6},\r\n{\"key\": \"12\", \"value\": 7},\r\n{\"key\": \"13\", \"value\": 8},\r\n{\"key\": \"14\", \"value\": 9},\r\n{\"key\": \"15\", \"value\": 10},\r\n{\"key\": \"16\", \"value\": 2550},\r\n{\"key\": \"17\", \"value\": 9000}\r\n]\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/detect/univariate?debug=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"detect",
+								"univariate"
+							],
+							"query": [
+								{
+									"key": "debug",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ch06 - Univariate - Decreased Sensitivity",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200: \" + pm.response.code, function () { pm.expect(pm.response.code).to.eql(200); });\r",
+									"pm.test(\"Response time is acceptable (range 5ms to 7000ms): \" + pm.response.responseTime + \"ms\", function () { pm.expect(_.inRange(pm.response.responseTime, 5, 7000)).to.eql(true); });\r",
+									"var body = JSON.parse(responseBody);\r",
+									"pm.test(\"Number of items returned is correct (eq 17): \" + body[\"anomalies\"].length, function () { pm.expect(body[\"anomalies\"].length).to.eql(17); });\r",
+									"pm.test(\"Debugging is enabled (debug_details exists):  \" + body[\"debug_details\"], function () { pm.expect(body[\"debug_details\"].exist); });\r",
+									"// In chapter 6, this was 1.  In chapter 9, it becomes 2.\r",
+									"pm.test(\"Count of anomalies is correct (eq 2)\", () => {\r",
+									"    let anomalies = body[\"anomalies\"].filter(a => a.is_anomaly === true);\r",
+									"    pm.expect(anomalies.length).to.eql(2);\r",
+									"} );"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n{\"key\": \"1\",\"value\": 1},\r\n{\"key\": \"2\", \"value\": 1},\r\n{\"key\": \"3\", \"value\": 2},\r\n{\"key\": \"4\", \"value\": 2},\r\n{\"key\": \"5\", \"value\": 3},\r\n{\"key\": \"6\", \"value\": 3},\r\n{\"key\": \"7\", \"value\": 4},\r\n{\"key\": \"8\", \"value\": 4},\r\n{\"key\": \"9\", \"value\": 5},\r\n{\"key\": \"10\", \"value\": 5},\r\n{\"key\": \"11\", \"value\": 6},\r\n{\"key\": \"12\", \"value\": 7},\r\n{\"key\": \"13\", \"value\": 8},\r\n{\"key\": \"14\", \"value\": 9},\r\n{\"key\": \"15\", \"value\": 10},\r\n{\"key\": \"16\", \"value\": 2550},\r\n{\"key\": \"17\", \"value\": 9000}\r\n]\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/detect/univariate?debug=true&sensitivity_score=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"detect",
+								"univariate"
+							],
+							"query": [
+								{
+									"key": "debug",
+									"value": "true"
+								},
+								{
+									"key": "sensitivity_score",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ch06 - Univariate - Increased Sensitivity",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200: \" + pm.response.code, function () { pm.expect(pm.response.code).to.eql(200); });\r",
+									"pm.test(\"Response time is acceptable (range 5ms to 7000ms): \" + pm.response.responseTime + \"ms\", function () { pm.expect(_.inRange(pm.response.responseTime, 5, 7000)).to.eql(true); });\r",
+									"var body = JSON.parse(responseBody);\r",
+									"pm.test(\"Number of items returned is correct (eq 17): \" + body[\"anomalies\"].length, function () { pm.expect(body[\"anomalies\"].length).to.eql(17); });\r",
+									"pm.test(\"Debugging is enabled (debug_details exists):  \" + body[\"debug_details\"], function () { pm.expect(body[\"debug_details\"].exist); });\r",
+									"// In chapter 6, this number was 5.  In chapter 7, it becomes 2.  In chapter 9, it becomes 6.\r",
+									"pm.test(\"Count of anomalies is correct (eq 6)\", () => {\r",
+									"    let anomalies = body[\"anomalies\"].filter(a => a.is_anomaly === true);\r",
+									"    pm.expect(anomalies.length).to.eql(6);\r",
+									"} );"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n{\"key\": \"1\",\"value\": 1},\r\n{\"key\": \"2\", \"value\": 1},\r\n{\"key\": \"3\", \"value\": 2},\r\n{\"key\": \"4\", \"value\": 2},\r\n{\"key\": \"5\", \"value\": 3},\r\n{\"key\": \"6\", \"value\": 3},\r\n{\"key\": \"7\", \"value\": 4},\r\n{\"key\": \"8\", \"value\": 4},\r\n{\"key\": \"9\", \"value\": 5},\r\n{\"key\": \"10\", \"value\": 5},\r\n{\"key\": \"11\", \"value\": 6},\r\n{\"key\": \"12\", \"value\": 7},\r\n{\"key\": \"13\", \"value\": 8},\r\n{\"key\": \"14\", \"value\": 9},\r\n{\"key\": \"15\", \"value\": 10},\r\n{\"key\": \"16\", \"value\": 2550},\r\n{\"key\": \"17\", \"value\": 9000}\r\n]\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/detect/univariate?debug=true&sensitivity_score=75",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"detect",
+								"univariate"
+							],
+							"query": [
+								{
+									"key": "debug",
+									"value": "true"
+								},
+								{
+									"key": "sensitivity_score",
+									"value": "75"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ch06 - Univariate - All Inputs",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200: \" + pm.response.code, function () { pm.expect(pm.response.code).to.eql(200); });\r",
+									"pm.test(\"Response time is acceptable (range 5ms to 7000ms): \" + pm.response.responseTime + \"ms\", function () { pm.expect(_.inRange(pm.response.responseTime, 5, 7000)).to.eql(true); });\r",
+									"var body = JSON.parse(responseBody);\r",
+									"pm.test(\"Number of items returned is correct (eq 130): \" + body[\"anomalies\"].length, function () { pm.expect(body[\"anomalies\"].length).to.eql(130); });\r",
+									"pm.test(\"Debugging is enabled (debug_details exists):  \" + body[\"debug_details\"], function () { pm.expect(body[\"debug_details\"].exist); });\r",
+									"pm.test(\"Count of anomalies is correct (eq 5)\", () => {\r",
+									"    let anomalies = body[\"anomalies\"].filter(a => a.is_anomaly === true);\r",
+									"    pm.expect(anomalies.length).to.eql(5);\r",
+									"} );"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[{\"key\":1,\"value\":22.46},{\"key\":2,\"value\":23.43},{\"key\":3,\"value\":35.40},{\"key\":4,\"value\":31.39},{\"key\":5,\"value\":20.69},{\"key\":6,\"value\":29.50},{\"key\":7,\"value\":25.48},{\"key\":8,\"value\":24.72},{\"key\":9,\"value\":22.67},{\"key\":10,\"value\":30.46},{\"key\":11,\"value\":29.28},{\"key\":12,\"value\":25.67},{\"key\":13,\"value\":23.84},{\"key\":14,\"value\":14.84},{\"key\":15,\"value\":21.98},{\"key\":16,\"value\":21.58},{\"key\":17,\"value\":29.70},{\"key\":18,\"value\":22.39},{\"key\":19,\"value\":22.78},{\"key\":20,\"value\":22.53},{\"key\":21,\"value\":18.81},{\"key\":22,\"value\":27.40},{\"key\":23,\"value\":16.63},{\"key\":24,\"value\":24.19},{\"key\":25,\"value\":27.32},{\"key\":26,\"value\":24.13},{\"key\":27,\"value\":10.57},{\"key\":28,\"value\":26.18},{\"key\":29,\"value\":25.67},{\"key\":30,\"value\":25.08},{\"key\":31,\"value\":29.75},{\"key\":32,\"value\":22.96},{\"key\":33,\"value\":23.51},{\"key\":34,\"value\":23.02},{\"key\":35,\"value\":26.60},{\"key\":36,\"value\":22.03},{\"key\":37,\"value\":15.29},{\"key\":38,\"value\":29.09},{\"key\":39,\"value\":24.62},{\"key\":40,\"value\":22.17},{\"key\":41,\"value\":35.23},{\"key\":42,\"value\":28.05},{\"key\":43,\"value\":19.49},{\"key\":44,\"value\":27.70},{\"key\":45,\"value\":17.47},{\"key\":46,\"value\":25.70},{\"key\":47,\"value\":19.30},{\"key\":48,\"value\":22.99},{\"key\":49,\"value\":24.80},{\"key\":50,\"value\":24.24},{\"key\":51,\"value\":18.18},{\"key\":52,\"value\":23.88},{\"key\":53,\"value\":25.38},{\"key\":54,\"value\":28.39},{\"key\":55,\"value\":25.19},{\"key\":56,\"value\":24.27},{\"key\":57,\"value\":8.67},{\"key\":58,\"value\":25.11},{\"key\":59,\"value\":33.27},{\"key\":60,\"value\":31.44},{\"key\":61,\"value\":19.38},{\"key\":62,\"value\":18.88},{\"key\":63,\"value\":27.06},{\"key\":64,\"value\":22.39},{\"key\":65,\"value\":28.85},{\"key\":66,\"value\":23.73},{\"key\":67,\"value\":16.19},{\"key\":68,\"value\":19.49},{\"key\":69,\"value\":29.89},{\"key\":70,\"value\":19.14},{\"key\":71,\"value\":25.53},{\"key\":72,\"value\":23.02},{\"key\":73,\"value\":30.99},{\"key\":74,\"value\":16.84},{\"key\":75,\"value\":23.07},{\"key\":76,\"value\":16.96},{\"key\":77,\"value\":26.96},{\"key\":78,\"value\":27.75},{\"key\":79,\"value\":28.03},{\"key\":80,\"value\":20.43},{\"key\":81,\"value\":25.39},{\"key\":82,\"value\":21.50},{\"key\":83,\"value\":19.50},{\"key\":84,\"value\":21.51},{\"key\":85,\"value\":20.47},{\"key\":86,\"value\":22.68},{\"key\":87,\"value\":26.88},{\"key\":88,\"value\":36.60},{\"key\":89,\"value\":30.75},{\"key\":90,\"value\":31.06},{\"key\":91,\"value\":18.45},{\"key\":92,\"value\":25.08},{\"key\":93,\"value\":26.95},{\"key\":94,\"value\":14.40},{\"key\":95,\"value\":26.11},{\"key\":96,\"value\":25.76},{\"key\":97,\"value\":29.24},{\"key\":98,\"value\":29.81},{\"key\":99,\"value\":14.57},{\"key\":100,\"value\":33.40},{\"key\":101,\"value\":29.51},{\"key\":102,\"value\":23.80},{\"key\":103,\"value\":14.28},{\"key\":104,\"value\":29.53},{\"key\":105,\"value\":26.77},{\"key\":106,\"value\":15.71},{\"key\":107,\"value\":28.89},{\"key\":108,\"value\":27.08},{\"key\":109,\"value\":22.64},{\"key\":110,\"value\":20.43},{\"key\":111,\"value\":22.87},{\"key\":112,\"value\":22.43},{\"key\":113,\"value\":24.80},{\"key\":114,\"value\":19.20},{\"key\":115,\"value\":31.48},{\"key\":116,\"value\":20.98},{\"key\":117,\"value\":23.93},{\"key\":118,\"value\":20.73},{\"key\":119,\"value\":19.91},{\"key\":120,\"value\":18.49},{\"key\":121,\"value\":19.49},{\"key\":122,\"value\":19.66},{\"key\":123,\"value\":17.30},{\"key\":124,\"value\":22.59},{\"key\":125,\"value\":16.57},{\"key\":5408,\"value\":106.35},{\"key\":5411,\"value\":102.20},{\"key\":5412,\"value\":111.52},{\"key\":5414,\"value\":101.15},{\"key\":5417,\"value\":108.07}]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/detect/univariate?debug=true&sensitivity_score=10&max_fraction_anomalies=0.05",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"detect",
+								"univariate"
+							],
+							"query": [
+								{
+									"key": "debug",
+									"value": "true"
+								},
+								{
+									"key": "sensitivity_score",
+									"value": "10"
+								},
+								{
+									"key": "max_fraction_anomalies",
+									"value": "0.05"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ch06 - Univariate - All Inputs - No Constraint",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200: \" + pm.response.code, function () { pm.expect(pm.response.code).to.eql(200); });\r",
+									"pm.test(\"Response time is acceptable (range 5ms to 7000ms): \" + pm.response.responseTime + \"ms\", function () { pm.expect(_.inRange(pm.response.responseTime, 5, 7000)).to.eql(true); });\r",
+									"var body = JSON.parse(responseBody);\r",
+									"pm.test(\"Number of items returned is correct (eq 130): \" + body[\"anomalies\"].length, function () { pm.expect(body[\"anomalies\"].length).to.eql(130); });\r",
+									"pm.test(\"Debugging is enabled (debug_details exists):  \" + body[\"debug_details\"], function () { pm.expect(body[\"debug_details\"].exist); });\r",
+									"// In chapter 6, this was 14.  In chapter 7, it becomes 8, matching the results from the relevant unit test. In chapter 9, it jumps to 16.\r",
+									"pm.test(\"Count of anomalies is correct (eq 16)\", () => {\r",
+									"    let anomalies = body[\"anomalies\"].filter(a => a.is_anomaly === true);\r",
+									"    pm.expect(anomalies.length).to.eql(16);\r",
+									"} );"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[{\"key\":1,\"value\":22.46},{\"key\":2,\"value\":23.43},{\"key\":3,\"value\":35.40},{\"key\":4,\"value\":31.39},{\"key\":5,\"value\":20.69},{\"key\":6,\"value\":29.50},{\"key\":7,\"value\":25.48},{\"key\":8,\"value\":24.72},{\"key\":9,\"value\":22.67},{\"key\":10,\"value\":30.46},{\"key\":11,\"value\":29.28},{\"key\":12,\"value\":25.67},{\"key\":13,\"value\":23.84},{\"key\":14,\"value\":14.84},{\"key\":15,\"value\":21.98},{\"key\":16,\"value\":21.58},{\"key\":17,\"value\":29.70},{\"key\":18,\"value\":22.39},{\"key\":19,\"value\":22.78},{\"key\":20,\"value\":22.53},{\"key\":21,\"value\":18.81},{\"key\":22,\"value\":27.40},{\"key\":23,\"value\":16.63},{\"key\":24,\"value\":24.19},{\"key\":25,\"value\":27.32},{\"key\":26,\"value\":24.13},{\"key\":27,\"value\":10.57},{\"key\":28,\"value\":26.18},{\"key\":29,\"value\":25.67},{\"key\":30,\"value\":25.08},{\"key\":31,\"value\":29.75},{\"key\":32,\"value\":22.96},{\"key\":33,\"value\":23.51},{\"key\":34,\"value\":23.02},{\"key\":35,\"value\":26.60},{\"key\":36,\"value\":22.03},{\"key\":37,\"value\":15.29},{\"key\":38,\"value\":29.09},{\"key\":39,\"value\":24.62},{\"key\":40,\"value\":22.17},{\"key\":41,\"value\":35.23},{\"key\":42,\"value\":28.05},{\"key\":43,\"value\":19.49},{\"key\":44,\"value\":27.70},{\"key\":45,\"value\":17.47},{\"key\":46,\"value\":25.70},{\"key\":47,\"value\":19.30},{\"key\":48,\"value\":22.99},{\"key\":49,\"value\":24.80},{\"key\":50,\"value\":24.24},{\"key\":51,\"value\":18.18},{\"key\":52,\"value\":23.88},{\"key\":53,\"value\":25.38},{\"key\":54,\"value\":28.39},{\"key\":55,\"value\":25.19},{\"key\":56,\"value\":24.27},{\"key\":57,\"value\":8.67},{\"key\":58,\"value\":25.11},{\"key\":59,\"value\":33.27},{\"key\":60,\"value\":31.44},{\"key\":61,\"value\":19.38},{\"key\":62,\"value\":18.88},{\"key\":63,\"value\":27.06},{\"key\":64,\"value\":22.39},{\"key\":65,\"value\":28.85},{\"key\":66,\"value\":23.73},{\"key\":67,\"value\":16.19},{\"key\":68,\"value\":19.49},{\"key\":69,\"value\":29.89},{\"key\":70,\"value\":19.14},{\"key\":71,\"value\":25.53},{\"key\":72,\"value\":23.02},{\"key\":73,\"value\":30.99},{\"key\":74,\"value\":16.84},{\"key\":75,\"value\":23.07},{\"key\":76,\"value\":16.96},{\"key\":77,\"value\":26.96},{\"key\":78,\"value\":27.75},{\"key\":79,\"value\":28.03},{\"key\":80,\"value\":20.43},{\"key\":81,\"value\":25.39},{\"key\":82,\"value\":21.50},{\"key\":83,\"value\":19.50},{\"key\":84,\"value\":21.51},{\"key\":85,\"value\":20.47},{\"key\":86,\"value\":22.68},{\"key\":87,\"value\":26.88},{\"key\":88,\"value\":36.60},{\"key\":89,\"value\":30.75},{\"key\":90,\"value\":31.06},{\"key\":91,\"value\":18.45},{\"key\":92,\"value\":25.08},{\"key\":93,\"value\":26.95},{\"key\":94,\"value\":14.40},{\"key\":95,\"value\":26.11},{\"key\":96,\"value\":25.76},{\"key\":97,\"value\":29.24},{\"key\":98,\"value\":29.81},{\"key\":99,\"value\":14.57},{\"key\":100,\"value\":33.40},{\"key\":101,\"value\":29.51},{\"key\":102,\"value\":23.80},{\"key\":103,\"value\":14.28},{\"key\":104,\"value\":29.53},{\"key\":105,\"value\":26.77},{\"key\":106,\"value\":15.71},{\"key\":107,\"value\":28.89},{\"key\":108,\"value\":27.08},{\"key\":109,\"value\":22.64},{\"key\":110,\"value\":20.43},{\"key\":111,\"value\":22.87},{\"key\":112,\"value\":22.43},{\"key\":113,\"value\":24.80},{\"key\":114,\"value\":19.20},{\"key\":115,\"value\":31.48},{\"key\":116,\"value\":20.98},{\"key\":117,\"value\":23.93},{\"key\":118,\"value\":20.73},{\"key\":119,\"value\":19.91},{\"key\":120,\"value\":18.49},{\"key\":121,\"value\":19.49},{\"key\":122,\"value\":19.66},{\"key\":123,\"value\":17.30},{\"key\":124,\"value\":22.59},{\"key\":125,\"value\":16.57},{\"key\":5408,\"value\":106.35},{\"key\":5411,\"value\":102.20},{\"key\":5412,\"value\":111.52},{\"key\":5414,\"value\":101.15},{\"key\":5417,\"value\":108.07}]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/detect/univariate?debug=true&sensitivity_score=50&max_fraction_anomalies=0.75",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"detect",
+								"univariate"
+							],
+							"query": [
+								{
+									"key": "debug",
+									"value": "true"
+								},
+								{
+									"key": "sensitivity_score",
+									"value": "50"
+								},
+								{
+									"key": "max_fraction_anomalies",
+									"value": "0.75"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ch06 - Univariate - All Inputs - Constraint Max Fraction",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200: \" + pm.response.code, function () { pm.expect(pm.response.code).to.eql(200); });\r",
+									"pm.test(\"Response time is acceptable (range 5ms to 7000ms): \" + pm.response.responseTime + \"ms\", function () { pm.expect(_.inRange(pm.response.responseTime, 5, 7000)).to.eql(true); });\r",
+									"var body = JSON.parse(responseBody);\r",
+									"pm.test(\"Number of items returned is correct (eq 130): \" + body[\"anomalies\"].length, function () { pm.expect(body[\"anomalies\"].length).to.eql(130); });\r",
+									"pm.test(\"Debugging is enabled (debug_details exists):  \" + body[\"debug_details\"], function () { pm.expect(body[\"debug_details\"].exist); });\r",
+									"pm.test(\"Count of anomalies is correct (eq 5)\", () => {\r",
+									"    let anomalies = body[\"anomalies\"].filter(a => a.is_anomaly === true);\r",
+									"    pm.expect(anomalies.length).to.eql(5);\r",
+									"} );"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[{\"key\":1,\"value\":22.46},{\"key\":2,\"value\":23.43},{\"key\":3,\"value\":35.40},{\"key\":4,\"value\":31.39},{\"key\":5,\"value\":20.69},{\"key\":6,\"value\":29.50},{\"key\":7,\"value\":25.48},{\"key\":8,\"value\":24.72},{\"key\":9,\"value\":22.67},{\"key\":10,\"value\":30.46},{\"key\":11,\"value\":29.28},{\"key\":12,\"value\":25.67},{\"key\":13,\"value\":23.84},{\"key\":14,\"value\":14.84},{\"key\":15,\"value\":21.98},{\"key\":16,\"value\":21.58},{\"key\":17,\"value\":29.70},{\"key\":18,\"value\":22.39},{\"key\":19,\"value\":22.78},{\"key\":20,\"value\":22.53},{\"key\":21,\"value\":18.81},{\"key\":22,\"value\":27.40},{\"key\":23,\"value\":16.63},{\"key\":24,\"value\":24.19},{\"key\":25,\"value\":27.32},{\"key\":26,\"value\":24.13},{\"key\":27,\"value\":10.57},{\"key\":28,\"value\":26.18},{\"key\":29,\"value\":25.67},{\"key\":30,\"value\":25.08},{\"key\":31,\"value\":29.75},{\"key\":32,\"value\":22.96},{\"key\":33,\"value\":23.51},{\"key\":34,\"value\":23.02},{\"key\":35,\"value\":26.60},{\"key\":36,\"value\":22.03},{\"key\":37,\"value\":15.29},{\"key\":38,\"value\":29.09},{\"key\":39,\"value\":24.62},{\"key\":40,\"value\":22.17},{\"key\":41,\"value\":35.23},{\"key\":42,\"value\":28.05},{\"key\":43,\"value\":19.49},{\"key\":44,\"value\":27.70},{\"key\":45,\"value\":17.47},{\"key\":46,\"value\":25.70},{\"key\":47,\"value\":19.30},{\"key\":48,\"value\":22.99},{\"key\":49,\"value\":24.80},{\"key\":50,\"value\":24.24},{\"key\":51,\"value\":18.18},{\"key\":52,\"value\":23.88},{\"key\":53,\"value\":25.38},{\"key\":54,\"value\":28.39},{\"key\":55,\"value\":25.19},{\"key\":56,\"value\":24.27},{\"key\":57,\"value\":8.67},{\"key\":58,\"value\":25.11},{\"key\":59,\"value\":33.27},{\"key\":60,\"value\":31.44},{\"key\":61,\"value\":19.38},{\"key\":62,\"value\":18.88},{\"key\":63,\"value\":27.06},{\"key\":64,\"value\":22.39},{\"key\":65,\"value\":28.85},{\"key\":66,\"value\":23.73},{\"key\":67,\"value\":16.19},{\"key\":68,\"value\":19.49},{\"key\":69,\"value\":29.89},{\"key\":70,\"value\":19.14},{\"key\":71,\"value\":25.53},{\"key\":72,\"value\":23.02},{\"key\":73,\"value\":30.99},{\"key\":74,\"value\":16.84},{\"key\":75,\"value\":23.07},{\"key\":76,\"value\":16.96},{\"key\":77,\"value\":26.96},{\"key\":78,\"value\":27.75},{\"key\":79,\"value\":28.03},{\"key\":80,\"value\":20.43},{\"key\":81,\"value\":25.39},{\"key\":82,\"value\":21.50},{\"key\":83,\"value\":19.50},{\"key\":84,\"value\":21.51},{\"key\":85,\"value\":20.47},{\"key\":86,\"value\":22.68},{\"key\":87,\"value\":26.88},{\"key\":88,\"value\":36.60},{\"key\":89,\"value\":30.75},{\"key\":90,\"value\":31.06},{\"key\":91,\"value\":18.45},{\"key\":92,\"value\":25.08},{\"key\":93,\"value\":26.95},{\"key\":94,\"value\":14.40},{\"key\":95,\"value\":26.11},{\"key\":96,\"value\":25.76},{\"key\":97,\"value\":29.24},{\"key\":98,\"value\":29.81},{\"key\":99,\"value\":14.57},{\"key\":100,\"value\":33.40},{\"key\":101,\"value\":29.51},{\"key\":102,\"value\":23.80},{\"key\":103,\"value\":14.28},{\"key\":104,\"value\":29.53},{\"key\":105,\"value\":26.77},{\"key\":106,\"value\":15.71},{\"key\":107,\"value\":28.89},{\"key\":108,\"value\":27.08},{\"key\":109,\"value\":22.64},{\"key\":110,\"value\":20.43},{\"key\":111,\"value\":22.87},{\"key\":112,\"value\":22.43},{\"key\":113,\"value\":24.80},{\"key\":114,\"value\":19.20},{\"key\":115,\"value\":31.48},{\"key\":116,\"value\":20.98},{\"key\":117,\"value\":23.93},{\"key\":118,\"value\":20.73},{\"key\":119,\"value\":19.91},{\"key\":120,\"value\":18.49},{\"key\":121,\"value\":19.49},{\"key\":122,\"value\":19.66},{\"key\":123,\"value\":17.30},{\"key\":124,\"value\":22.59},{\"key\":125,\"value\":16.57},{\"key\":5408,\"value\":106.35},{\"key\":5411,\"value\":102.20},{\"key\":5412,\"value\":111.52},{\"key\":5414,\"value\":101.15},{\"key\":5417,\"value\":108.07}]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/detect/univariate?debug=true&sensitivity_score=75&max_fraction_anomalies=0.035",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"detect",
+								"univariate"
+							],
+							"query": [
+								{
+									"key": "debug",
+									"value": "true"
+								},
+								{
+									"key": "sensitivity_score",
+									"value": "75"
+								},
+								{
+									"key": "max_fraction_anomalies",
+									"value": "0.035"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ch07",
+			"item": [
+				{
+					"name": "Ch07 - Univariate - Normalization Fails",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200: \" + pm.response.code, function () { pm.expect(pm.response.code).to.eql(200); });\r",
+									"pm.test(\"Response time is acceptable (range 5ms to 7000ms): \" + pm.response.responseTime + \"ms\", function () { pm.expect(_.inRange(pm.response.responseTime, 5, 7000)).to.eql(true); });\r",
+									"var body = JSON.parse(responseBody);\r",
+									"pm.test(\"Number of items returned is correct (eq 17): \" + body[\"anomalies\"].length, function () { pm.expect(body[\"anomalies\"].length).to.eql(17); });\r",
+									"pm.test(\"Debugging is enabled (debug_details exists):  \" + body[\"debug_details\"], function () { pm.expect(body[\"debug_details\"].exist); });\r",
+									"// In chapter 7, this was 5.  In chapter 9, it increases to 7.\r",
+									"pm.test(\"Count of anomalies is correct (eq 7)\", () => {\r",
+									"    let anomalies = body[\"anomalies\"].filter(a => a.is_anomaly === true);\r",
+									"    pm.expect(anomalies.length).to.eql(7);\r",
+									"} );"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n{\"key\": \"1\",\"value\": 100},\r\n{\"key\": \"2\", \"value\": 10},\r\n{\"key\": \"3\", \"value\": 2000},\r\n{\"key\": \"4\", \"value\": 20},\r\n{\"key\": \"5\", \"value\": 30},\r\n{\"key\": \"6\", \"value\": 300},\r\n{\"key\": \"7\", \"value\": 40000},\r\n{\"key\": \"8\", \"value\": 40},\r\n{\"key\": \"9\", \"value\": 95},\r\n{\"key\": \"10\", \"value\": -5},\r\n{\"key\": \"11\", \"value\": -6},\r\n{\"key\": \"12\", \"value\": 7.3},\r\n{\"key\": \"13\", \"value\": 0.8},\r\n{\"key\": \"14\", \"value\": 9},\r\n{\"key\": \"15\", \"value\": 10},\r\n{\"key\": \"16\", \"value\": 2550},\r\n{\"key\": \"17\", \"value\": 9000}\r\n]\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/detect/univariate?debug=true&sensitivity_score=75",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"detect",
+								"univariate"
+							],
+							"query": [
+								{
+									"key": "debug",
+									"value": "true"
+								},
+								{
+									"key": "sensitivity_score",
+									"value": "75"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ch07 - Univariate - Normalization Unnecessary",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200: \" + pm.response.code, function () { pm.expect(pm.response.code).to.eql(200); });\r",
+									"pm.test(\"Response time is acceptable (range 5ms to 7000ms): \" + pm.response.responseTime + \"ms\", function () { pm.expect(_.inRange(pm.response.responseTime, 5, 7000)).to.eql(true); });\r",
+									"var body = JSON.parse(responseBody);\r",
+									"pm.test(\"Number of items returned is correct (eq 10): \" + body[\"anomalies\"].length, function () { pm.expect(body[\"anomalies\"].length).to.eql(10); });\r",
+									"pm.test(\"Debugging is enabled (debug_details exists):  \" + body[\"debug_details\"], function () { pm.expect(body[\"debug_details\"].exist); });\r",
+									"pm.test(\"Count of anomalies is correct (eq 0)\", () => {\r",
+									"    let anomalies = body[\"anomalies\"].filter(a => a.is_anomaly === true);\r",
+									"    pm.expect(anomalies.length).to.eql(0);\r",
+									"} );\r",
+									"pm.test(\"We do NOT have fitted results (Fitted Lambda is undefined):  \" + body[\"debug_details\"][\"Test diagnostics\"][\"Fitted Lambda\"], function () { pm.expect(body[\"debug_details\"][\"Test diagnostics\"][\"Fitted Lambda\"]).to.eql(undefined); });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n{\"key\": \"1\",\"value\": 1},\r\n{\"key\": \"2\", \"value\": 2},\r\n{\"key\": \"3\", \"value\": 3},\r\n{\"key\": \"4\", \"value\": 4},\r\n{\"key\": \"5\", \"value\": 5},\r\n{\"key\": \"6\", \"value\": 6},\r\n{\"key\": \"7\", \"value\": 7},\r\n{\"key\": \"8\", \"value\": 8},\r\n{\"key\": \"9\", \"value\": 9},\r\n{\"key\": \"10\", \"value\": 10}\r\n]\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/detect/univariate?debug=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"detect",
+								"univariate"
+							],
+							"query": [
+								{
+									"key": "debug",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ch07 - Univariate - Normalization Succeeds",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200: \" + pm.response.code, function () { pm.expect(pm.response.code).to.eql(200); });\r",
+									"pm.test(\"Response time is acceptable (range 5ms to 7000ms): \" + pm.response.responseTime + \"ms\", function () { pm.expect(_.inRange(pm.response.responseTime, 5, 7000)).to.eql(true); });\r",
+									"var body = JSON.parse(responseBody);\r",
+									"pm.test(\"Number of items returned is correct (eq 17): \" + body[\"anomalies\"].length, function () { pm.expect(body[\"anomalies\"].length).to.eql(17); });\r",
+									"pm.test(\"Debugging is enabled (debug_details exists):  \" + body[\"debug_details\"], function () { pm.expect(body[\"debug_details\"].exist); });\r",
+									"pm.test(\"Count of anomalies is correct (eq 2)\", () => {\r",
+									"    let anomalies = body[\"anomalies\"].filter(a => a.is_anomaly === true);\r",
+									"    pm.expect(anomalies.length).to.eql(2);\r",
+									"} );\r",
+									"pm.test(\"We have fitted results (Fitted Lambda exists):  \" + body[\"debug_details\"][\"Test diagnostics\"][\"Fitted Lambda\"], function () { pm.expect(body[\"debug_details\"][\"Test diagnostics\"][\"Fitted Lambda\"].exist); });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n{\"key\": \"1\",\"value\": 1},\r\n{\"key\": \"2\", \"value\": 1},\r\n{\"key\": \"3\", \"value\": 2},\r\n{\"key\": \"4\", \"value\": 2},\r\n{\"key\": \"5\", \"value\": 3},\r\n{\"key\": \"6\", \"value\": 3},\r\n{\"key\": \"7\", \"value\": 4},\r\n{\"key\": \"8\", \"value\": 4},\r\n{\"key\": \"9\", \"value\": 5},\r\n{\"key\": \"10\", \"value\": 5},\r\n{\"key\": \"11\", \"value\": 6},\r\n{\"key\": \"12\", \"value\": 7},\r\n{\"key\": \"13\", \"value\": 8},\r\n{\"key\": \"14\", \"value\": 9},\r\n{\"key\": \"15\", \"value\": 10},\r\n{\"key\": \"16\", \"value\": 2550},\r\n{\"key\": \"17\", \"value\": 9000}\r\n]\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/detect/univariate?debug=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"detect",
+								"univariate"
+							],
+							"query": [
+								{
+									"key": "debug",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ch07 - Univariate - Outliers Slip in with Multi-Peaked Data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200: \" + pm.response.code, function () { pm.expect(pm.response.code).to.eql(200); });\r",
+									"pm.test(\"Response time is acceptable (range 5ms to 7000ms): \" + pm.response.responseTime + \"ms\", function () { pm.expect(_.inRange(pm.response.responseTime, 5, 7000)).to.eql(true); });\r",
+									"var body = JSON.parse(responseBody);\r",
+									"pm.test(\"Number of items returned is correct (eq 13): \" + body[\"anomalies\"].length, function () { pm.expect(body[\"anomalies\"].length).to.eql(13); });\r",
+									"pm.test(\"Debugging is enabled (debug_details exists):  \" + body[\"debug_details\"], function () { pm.expect(body[\"debug_details\"].exist); });\r",
+									"// Ideally, this should be 1.\r",
+									"pm.test(\"Count of anomalies is correct (eq 0)\", () => {\r",
+									"    let anomalies = body[\"anomalies\"].filter(a => a.is_anomaly === true);\r",
+									"    pm.expect(anomalies.length).to.eql(0);\r",
+									"} );\r",
+									"pm.test(\"We have fitted results (Fitted Lambda exists):  \" + body[\"debug_details\"][\"Test diagnostics\"][\"Fitted Lambda\"], function () { pm.expect(body[\"debug_details\"][\"Test diagnostics\"][\"Fitted Lambda\"].exist); });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n{\"key\": \"1\",\"value\": 1},\r\n{\"key\": \"2\", \"value\": 2},\r\n{\"key\": \"3\", \"value\": 3},\r\n{\"key\": \"4\", \"value\": 4},\r\n{\"key\": \"5\", \"value\": 5},\r\n{\"key\": \"6\", \"value\": 6},\r\n{\"key\": \"7\", \"value\": 50},\r\n{\"key\": \"8\", \"value\": 95},\r\n{\"key\": \"9\", \"value\": 96},\r\n{\"key\": \"10\", \"value\": 97},\r\n{\"key\": \"11\", \"value\": 98},\r\n{\"key\": \"12\", \"value\": 99},\r\n{\"key\": \"13\", \"value\": 100}\r\n]\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/detect/univariate?debug=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"detect",
+								"univariate"
+							],
+							"query": [
+								{
+									"key": "debug",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ch09",
+			"item": [
+				{
+					"name": "Ch09 - Univariate - All Inputs - No Anomalies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200: \" + pm.response.code, function () { pm.expect(pm.response.code).to.eql(200); });\r",
+									"pm.test(\"Response time is acceptable (range 5ms to 7000ms): \" + pm.response.responseTime + \"ms\", function () { pm.expect(_.inRange(pm.response.responseTime, 5, 7000)).to.eql(true); });\r",
+									"var body = JSON.parse(responseBody);\r",
+									"pm.test(\"Number of items returned is correct (eq 133): \" + body[\"anomalies\"].length, function () { pm.expect(body[\"anomalies\"].length).to.eql(133); });\r",
+									"pm.test(\"Debugging is enabled (debug_details exists):  \" + body[\"debug_details\"], function () { pm.expect(body[\"debug_details\"].exist); });\r",
+									"// With more than 5% of data in one cluster we no longer have anomalies!\r",
+									"pm.test(\"Count of anomalies is correct (eq 0)\", () => {\r",
+									"    let anomalies = body[\"anomalies\"].filter(a => a.is_anomaly === true);\r",
+									"    pm.expect(anomalies.length).to.eql(0);\r",
+									"} );"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[{\"key\":1,\"value\":22.46},{\"key\":2,\"value\":23.43},{\"key\":3,\"value\":35.40},{\"key\":4,\"value\":31.39},{\"key\":5,\"value\":20.69},{\"key\":6,\"value\":29.50},{\"key\":7,\"value\":25.48},{\"key\":8,\"value\":24.72},{\"key\":9,\"value\":22.67},{\"key\":10,\"value\":30.46},{\"key\":11,\"value\":29.28},{\"key\":12,\"value\":25.67},{\"key\":13,\"value\":23.84},{\"key\":14,\"value\":14.84},{\"key\":15,\"value\":21.98},{\"key\":16,\"value\":21.58},{\"key\":17,\"value\":29.70},{\"key\":18,\"value\":22.39},{\"key\":19,\"value\":22.78},{\"key\":20,\"value\":22.53},{\"key\":21,\"value\":18.81},{\"key\":22,\"value\":27.40},{\"key\":23,\"value\":16.63},{\"key\":24,\"value\":24.19},{\"key\":25,\"value\":27.32},{\"key\":26,\"value\":24.13},{\"key\":27,\"value\":10.57},{\"key\":28,\"value\":26.18},{\"key\":29,\"value\":25.67},{\"key\":30,\"value\":25.08},{\"key\":31,\"value\":29.75},{\"key\":32,\"value\":22.96},{\"key\":33,\"value\":23.51},{\"key\":34,\"value\":23.02},{\"key\":35,\"value\":26.60},{\"key\":36,\"value\":22.03},{\"key\":37,\"value\":15.29},{\"key\":38,\"value\":29.09},{\"key\":39,\"value\":24.62},{\"key\":40,\"value\":22.17},{\"key\":41,\"value\":35.23},{\"key\":42,\"value\":28.05},{\"key\":43,\"value\":19.49},{\"key\":44,\"value\":27.70},{\"key\":45,\"value\":17.47},{\"key\":46,\"value\":25.70},{\"key\":47,\"value\":19.30},{\"key\":48,\"value\":22.99},{\"key\":49,\"value\":24.80},{\"key\":50,\"value\":24.24},{\"key\":51,\"value\":18.18},{\"key\":52,\"value\":23.88},{\"key\":53,\"value\":25.38},{\"key\":54,\"value\":28.39},{\"key\":55,\"value\":25.19},{\"key\":56,\"value\":24.27},{\"key\":57,\"value\":8.67},{\"key\":58,\"value\":25.11},{\"key\":59,\"value\":33.27},{\"key\":60,\"value\":31.44},{\"key\":61,\"value\":19.38},{\"key\":62,\"value\":18.88},{\"key\":63,\"value\":27.06},{\"key\":64,\"value\":22.39},{\"key\":65,\"value\":28.85},{\"key\":66,\"value\":23.73},{\"key\":67,\"value\":16.19},{\"key\":68,\"value\":19.49},{\"key\":69,\"value\":29.89},{\"key\":70,\"value\":19.14},{\"key\":71,\"value\":25.53},{\"key\":72,\"value\":23.02},{\"key\":73,\"value\":30.99},{\"key\":74,\"value\":16.84},{\"key\":75,\"value\":23.07},{\"key\":76,\"value\":16.96},{\"key\":77,\"value\":26.96},{\"key\":78,\"value\":27.75},{\"key\":79,\"value\":28.03},{\"key\":80,\"value\":20.43},{\"key\":81,\"value\":25.39},{\"key\":82,\"value\":21.50},{\"key\":83,\"value\":19.50},{\"key\":84,\"value\":21.51},{\"key\":85,\"value\":20.47},{\"key\":86,\"value\":22.68},{\"key\":87,\"value\":26.88},{\"key\":88,\"value\":36.60},{\"key\":89,\"value\":30.75},{\"key\":90,\"value\":31.06},{\"key\":91,\"value\":18.45},{\"key\":92,\"value\":25.08},{\"key\":93,\"value\":26.95},{\"key\":94,\"value\":14.40},{\"key\":95,\"value\":26.11},{\"key\":96,\"value\":25.76},{\"key\":97,\"value\":29.24},{\"key\":98,\"value\":29.81},{\"key\":99,\"value\":14.57},{\"key\":100,\"value\":33.40},{\"key\":101,\"value\":29.51},{\"key\":102,\"value\":23.80},{\"key\":103,\"value\":14.28},{\"key\":104,\"value\":29.53},{\"key\":105,\"value\":26.77},{\"key\":106,\"value\":15.71},{\"key\":107,\"value\":28.89},{\"key\":108,\"value\":27.08},{\"key\":109,\"value\":22.64},{\"key\":110,\"value\":20.43},{\"key\":111,\"value\":22.87},{\"key\":112,\"value\":22.43},{\"key\":113,\"value\":24.80},{\"key\":114,\"value\":19.20},{\"key\":115,\"value\":31.48},{\"key\":116,\"value\":20.98},{\"key\":117,\"value\":23.93},{\"key\":118,\"value\":20.73},{\"key\":119,\"value\":19.91},{\"key\":120,\"value\":18.49},{\"key\":121,\"value\":19.49},{\"key\":122,\"value\":19.66},{\"key\":123,\"value\":17.30},{\"key\":124,\"value\":22.59},{\"key\":125,\"value\":16.57},{\"key\":5408,\"value\":106.35},{\"key\":5411,\"value\":102.20},{\"key\":5412,\"value\":111.52},{\"key\":5414,\"value\":101.15},{\"key\":5417,\"value\":108.07},{\"key\":5412,\"value\":111.46},{\"key\":5414,\"value\":101.25},{\"key\":5417,\"value\":108.37}]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/detect/univariate?debug=true&sensitivity_score=10&max_fraction_anomalies=0.05",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"detect",
+								"univariate"
+							],
+							"query": [
+								{
+									"key": "debug",
+									"value": "true"
+								},
+								{
+									"key": "sensitivity_score",
+									"value": "10"
+								},
+								{
+									"key": "max_fraction_anomalies",
+									"value": "0.05"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ch10",
+			"item": [
+				{
+					"name": "Ch10 - Multivariate - Debug - No Outliers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200: \" + pm.response.code, function () { pm.expect(pm.response.code).to.eql(200); });\r",
+									"pm.test(\"Response time is acceptable (range 5ms to 7000ms): \" + pm.response.responseTime + \"ms\", function () { pm.expect(_.inRange(pm.response.responseTime, 5, 7000)).to.eql(true); });\r",
+									"var body = JSON.parse(responseBody);\r",
+									"pm.test(\"Number of items returned is correct (eq 15): \" + body[\"anomalies\"].length, function () { pm.expect(body[\"anomalies\"].length).to.eql(15); });\r",
+									"pm.test(\"Debugging is enabled (debug_details exists):  \" + body[\"debug_details\"], function () { pm.expect(body[\"debug_details\"].exist); });\r",
+									"pm.test(\"Count of anomalies is correct (eq 0)\", () => {\r",
+									"    let anomalies = body[\"anomalies\"].filter(a => a.is_anomaly === true);\r",
+									"    pm.expect(anomalies.length).to.eql(0);\r",
+									"} );"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[{\"key\":1,\"vals\":[22.46, 17.69, 8.04, 14.11]},\r\n{\"key\":2,\"vals\":[22.56, 17.69, 8.04, 14.11]},\r\n{\"key\":3,\"vals\":[22.66, 17.69, 8.04, 14.11]},\r\n{\"key\":4,\"vals\":[22.76, 17.69, 8.04, 14.11]},\r\n{\"key\":5,\"vals\":[22.896, 17.69, 8.04, 14.11]},\r\n{\"key\":6,\"vals\":[22.9, 17.69, 8.04, 14.11]},\r\n{\"key\":7,\"vals\":[22.06, 17.69, 8.04, 14.11]},\r\n{\"key\":8,\"vals\":[22.16, 17.69, 8.04, 14.11]},\r\n{\"key\":9,\"vals\":[22.26, 17.69, 8.04, 14.11]},\r\n{\"key\":10,\"vals\":[22.36, 17.69, 8.04, 14.11]},\r\n{\"key\":11,\"vals\":[22.46, 17.69, 8.04, 14.11]},\r\n{\"key\":12,\"vals\":[22.56, 17.69, 8.04, 14.11]},\r\n{\"key\":13,\"vals\":[22.66, 17.69, 8.04, 14.11]},\r\n{\"key\":14,\"vals\":[22.76, 17.69, 8.04, 14.11]},\r\n{\"key\":15,\"vals\":[22.86, 17.69, 8.04, 14.11]}]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/detect/multivariate?debug=true&sensitivity_score=60&max_fraction_anomalies=0.15&n_neighbors=5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"detect",
+								"multivariate"
+							],
+							"query": [
+								{
+									"key": "debug",
+									"value": "true"
+								},
+								{
+									"key": "sensitivity_score",
+									"value": "60"
+								},
+								{
+									"key": "max_fraction_anomalies",
+									"value": "0.15"
+								},
+								{
+									"key": "n_neighbors",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ch10 - Multivariate - NoDebug - No Outliers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200: \" + pm.response.code, function () { pm.expect(pm.response.code).to.eql(200); });\r",
+									"pm.test(\"Response time is acceptable (range 5ms to 7000ms): \" + pm.response.responseTime + \"ms\", function () { pm.expect(_.inRange(pm.response.responseTime, 5, 7000)).to.eql(true); });\r",
+									"var body = JSON.parse(responseBody);\r",
+									"pm.test(\"Number of items returned is correct (eq 15): \" + body[\"anomalies\"].length, function () { pm.expect(body[\"anomalies\"].length).to.eql(15); });\r",
+									"pm.test(\"Debugging is not enabled (debug_details does not exist).\", function () { pm.expect(body[\"debug_details\"]).undefined; });\r",
+									"pm.test(\"Count of anomalies is correct (eq 0)\", () => {\r",
+									"    let anomalies = body[\"anomalies\"].filter(a => a.is_anomaly === true);\r",
+									"    pm.expect(anomalies.length).to.eql(0);\r",
+									"} );"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[{\"key\":1,\"vals\":[22.46, 17.69, 8.04, 14.11]},\r\n{\"key\":2,\"vals\":[22.56, 17.69, 8.04, 14.11]},\r\n{\"key\":3,\"vals\":[22.66, 17.69, 8.04, 14.11]},\r\n{\"key\":4,\"vals\":[22.76, 17.69, 8.04, 14.11]},\r\n{\"key\":5,\"vals\":[22.896, 17.69, 8.04, 14.11]},\r\n{\"key\":6,\"vals\":[22.9, 17.69, 8.04, 14.11]},\r\n{\"key\":7,\"vals\":[22.06, 17.69, 8.04, 14.11]},\r\n{\"key\":8,\"vals\":[22.16, 17.69, 8.04, 14.11]},\r\n{\"key\":9,\"vals\":[22.26, 17.69, 8.04, 14.11]},\r\n{\"key\":10,\"vals\":[22.36, 17.69, 8.04, 14.11]},\r\n{\"key\":11,\"vals\":[22.46, 17.69, 8.04, 14.11]},\r\n{\"key\":12,\"vals\":[22.56, 17.69, 8.04, 14.11]},\r\n{\"key\":13,\"vals\":[22.66, 17.69, 8.04, 14.11]},\r\n{\"key\":14,\"vals\":[22.76, 17.69, 8.04, 14.11]},\r\n{\"key\":15,\"vals\":[22.86, 17.69, 8.04, 14.11]}]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/detect/multivariate?debug=false&sensitivity_score=60&max_fraction_anomalies=0.15&n_neighbors=5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"detect",
+								"multivariate"
+							],
+							"query": [
+								{
+									"key": "debug",
+									"value": "false"
+								},
+								{
+									"key": "sensitivity_score",
+									"value": "60"
+								},
+								{
+									"key": "max_fraction_anomalies",
+									"value": "0.15"
+								},
+								{
+									"key": "n_neighbors",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ch10 - Multivariate - Debug - One Outlier",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200: \" + pm.response.code, function () { pm.expect(pm.response.code).to.eql(200); });\r",
+									"pm.test(\"Response time is acceptable (range 5ms to 7000ms): \" + pm.response.responseTime + \"ms\", function () { pm.expect(_.inRange(pm.response.responseTime, 5, 7000)).to.eql(true); });\r",
+									"var body = JSON.parse(responseBody);\r",
+									"pm.test(\"Number of items returned is correct (eq 15): \" + body[\"anomalies\"].length, function () { pm.expect(body[\"anomalies\"].length).to.eql(15); });\r",
+									"pm.test(\"Debugging is enabled (debug_details exists):  \" + body[\"debug_details\"], function () { pm.expect(body[\"debug_details\"].exist); });\r",
+									"pm.test(\"Count of anomalies is correct (eq 1)\", () => {\r",
+									"    let anomalies = body[\"anomalies\"].filter(a => a.is_anomaly === true);\r",
+									"    pm.expect(anomalies.length).to.eql(1);\r",
+									"} );"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[{\"key\":1,\"vals\":[22.46, 17.69, 8.04, 14.11]},\r\n{\"key\":2,\"vals\":[22.56, 17.69, 8.04, 14.11]},\r\n{\"key\":3,\"vals\":[22.66, 17.69, 8.04, 14.11]},\r\n{\"key\":4,\"vals\":[22.76, 17.69, 8.04, 14.11]},\r\n{\"key\":5,\"vals\":[22.896, 17.69, 8.04, 14.11]},\r\n{\"key\":6,\"vals\":[22.9, 17.69, 8.04, 14.11]},\r\n{\"key\":7,\"vals\":[22.06, 17.69, 8.04, 14.11]},\r\n{\"key\":8,\"vals\":[22.16, 17.69, 8.04, 14.11]},\r\n{\"key\":9,\"vals\":[22.26, 17.69, 8.04, 14.11]},\r\n{\"key\":10,\"vals\":[22.36, 178.69, 8.04, 14.11]},\r\n{\"key\":11,\"vals\":[22.46, 17.69, 8.04, 14.11]},\r\n{\"key\":12,\"vals\":[22.56, 17.69, 8.04, 14.11]},\r\n{\"key\":13,\"vals\":[22.66, 17.69, 8.04, 14.11]},\r\n{\"key\":14,\"vals\":[22.76, 17.69, 8.04, 14.11]},\r\n{\"key\":15,\"vals\":[22.86, 17.69, 8.04, 14.11]}]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/detect/multivariate?debug=true&sensitivity_score=60&max_fraction_anomalies=0.15&n_neighbors=5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"detect",
+								"multivariate"
+							],
+							"query": [
+								{
+									"key": "debug",
+									"value": "true"
+								},
+								{
+									"key": "sensitivity_score",
+									"value": "60"
+								},
+								{
+									"key": "max_fraction_anomalies",
+									"value": "0.15"
+								},
+								{
+									"key": "n_neighbors",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ch10 - Multivariate - Debug - Two Outliers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200: \" + pm.response.code, function () { pm.expect(pm.response.code).to.eql(200); });\r",
+									"pm.test(\"Response time is acceptable (range 5ms to 7000ms): \" + pm.response.responseTime + \"ms\", function () { pm.expect(_.inRange(pm.response.responseTime, 5, 7000)).to.eql(true); });\r",
+									"var body = JSON.parse(responseBody);\r",
+									"pm.test(\"Number of items returned is correct (eq 15): \" + body[\"anomalies\"].length, function () { pm.expect(body[\"anomalies\"].length).to.eql(15); });\r",
+									"pm.test(\"Debugging is enabled (debug_details exists):  \" + body[\"debug_details\"], function () { pm.expect(body[\"debug_details\"].exist); });\r",
+									"pm.test(\"Count of anomalies is correct (eq 2)\", () => {\r",
+									"    let anomalies = body[\"anomalies\"].filter(a => a.is_anomaly === true);\r",
+									"    pm.expect(anomalies.length).to.eql(2);\r",
+									"} );"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[{\"key\":1,\"vals\":[22.46, 17.69, 8.04, 14.11]},\r\n{\"key\":2,\"vals\":[22.56, 17.69, 8.04, 14.11]},\r\n{\"key\":3,\"vals\":[22.66, 17.69, 8.04, 14.11]},\r\n{\"key\":4,\"vals\":[22.76, 17.69, 8.04, 14.11]},\r\n{\"key\":5,\"vals\":[22.896, 17.69, 8.04, 14.11]},\r\n{\"key\":6,\"vals\":[22.9, 27.69, 28.10, 14.11]},\r\n{\"key\":7,\"vals\":[22.06, 17.69, 8.04, 14.11]},\r\n{\"key\":8,\"vals\":[22.16, 17.69, 8.04, 14.11]},\r\n{\"key\":9,\"vals\":[22.26, 17.69, 8.04, 14.11]},\r\n{\"key\":10,\"vals\":[22.36, 178.69, 8.04, 14.11]},\r\n{\"key\":11,\"vals\":[22.46, 17.69, 8.04, 14.11]},\r\n{\"key\":12,\"vals\":[22.56, 17.69, 8.04, 14.11]},\r\n{\"key\":13,\"vals\":[22.66, 17.69, 8.04, 14.11]},\r\n{\"key\":14,\"vals\":[22.76, 17.69, 8.04, 14.11]},\r\n{\"key\":15,\"vals\":[22.86, 17.69, 8.04, 14.11]}]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/detect/multivariate?debug=true&sensitivity_score=60&max_fraction_anomalies=0.15&n_neighbors=5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"detect",
+								"multivariate"
+							],
+							"query": [
+								{
+									"key": "debug",
+									"value": "true"
+								},
+								{
+									"key": "sensitivity_score",
+									"value": "60"
+								},
+								{
+									"key": "max_fraction_anomalies",
+									"value": "0.15"
+								},
+								{
+									"key": "n_neighbors",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ch10 - Multivariate - Debug - Small and Large Outliers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200: \" + pm.response.code, function () { pm.expect(pm.response.code).to.eql(200); });\r",
+									"pm.test(\"Response time is acceptable (range 5ms to 7000ms): \" + pm.response.responseTime + \"ms\", function () { pm.expect(_.inRange(pm.response.responseTime, 5, 7000)).to.eql(true); });\r",
+									"var body = JSON.parse(responseBody);\r",
+									"pm.test(\"Number of items returned is correct (eq 15): \" + body[\"anomalies\"].length, function () { pm.expect(body[\"anomalies\"].length).to.eql(15); });\r",
+									"pm.test(\"Debugging is enabled (debug_details exists):  \" + body[\"debug_details\"], function () { pm.expect(body[\"debug_details\"].exist); });\r",
+									"pm.test(\"Count of anomalies is correct (eq 2)\", () => {\r",
+									"    let anomalies = body[\"anomalies\"].filter(a => a.is_anomaly === true);\r",
+									"    pm.expect(anomalies.length).to.eql(2);\r",
+									"} );"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[{\"key\":1,\"vals\":[22.46, 17.69, 8.04, 14.11]},\r\n{\"key\":2,\"vals\":[22.56, 17.69, 8.04, 14.11]},\r\n{\"key\":3,\"vals\":[22.66, 17.69, 8.04, 14.11]},\r\n{\"key\":4,\"vals\":[22.76, 17.69, 8.04, 14.11]},\r\n{\"key\":5,\"vals\":[22.896, 17.69, 8.04, 14.11]},\r\n{\"key\":6,\"vals\":[22.9, 22.69, 8.04, 14.11]},\r\n{\"key\":7,\"vals\":[22.06, 17.69, 8.04, 14.11]},\r\n{\"key\":8,\"vals\":[22.16, 17.69, 8.04, 14.11]},\r\n{\"key\":9,\"vals\":[22.26, 17.69, 8.04, 14.11]},\r\n{\"key\":10,\"vals\":[22.36, 178.69, 8.04, 14.11]},\r\n{\"key\":11,\"vals\":[22.46, 17.69, 8.04, 14.11]},\r\n{\"key\":12,\"vals\":[22.56, 17.69, 8.04, 14.11]},\r\n{\"key\":13,\"vals\":[22.66, 17.69, 8.04, 14.11]},\r\n{\"key\":14,\"vals\":[22.76, 17.69, 8.04, 14.11]},\r\n{\"key\":15,\"vals\":[22.86, 17.69, 8.04, 14.11]}]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/detect/multivariate?debug=true&sensitivity_score=75&max_fraction_anomalies=0.15&n_neighbors=5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"detect",
+								"multivariate"
+							],
+							"query": [
+								{
+									"key": "debug",
+									"value": "true"
+								},
+								{
+									"key": "sensitivity_score",
+									"value": "75"
+								},
+								{
+									"key": "max_fraction_anomalies",
+									"value": "0.15"
+								},
+								{
+									"key": "n_neighbors",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ch10 - Multivariate - Debug - Small and Large Outliers Low Sensitivity",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200: \" + pm.response.code, function () { pm.expect(pm.response.code).to.eql(200); });\r",
+									"pm.test(\"Response time is acceptable (range 5ms to 7000ms): \" + pm.response.responseTime + \"ms\", function () { pm.expect(_.inRange(pm.response.responseTime, 5, 7000)).to.eql(true); });\r",
+									"var body = JSON.parse(responseBody);\r",
+									"pm.test(\"Number of items returned is correct (eq 15): \" + body[\"anomalies\"].length, function () { pm.expect(body[\"anomalies\"].length).to.eql(15); });\r",
+									"pm.test(\"Debugging is enabled (debug_details exists):  \" + body[\"debug_details\"], function () { pm.expect(body[\"debug_details\"].exist); });\r",
+									"pm.test(\"Count of anomalies is correct (eq 2)\", () => {\r",
+									"    let anomalies = body[\"anomalies\"].filter(a => a.is_anomaly === true);\r",
+									"    pm.expect(anomalies.length).to.eql(2);\r",
+									"} );"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[{\"key\":1,\"vals\":[22.46, 17.69, 8.04, 14.11]},\r\n{\"key\":2,\"vals\":[22.56, 17.69, 8.04, 14.11]},\r\n{\"key\":3,\"vals\":[22.66, 17.69, 8.04, 14.11]},\r\n{\"key\":4,\"vals\":[22.76, 17.69, 8.04, 14.11]},\r\n{\"key\":5,\"vals\":[22.896, 17.69, 8.04, 14.11]},\r\n{\"key\":6,\"vals\":[22.9, 22.69, 8.04, 14.11]},\r\n{\"key\":7,\"vals\":[22.06, 17.69, 8.04, 14.11]},\r\n{\"key\":8,\"vals\":[22.16, 17.69, 8.04, 14.11]},\r\n{\"key\":9,\"vals\":[22.26, 17.69, 8.04, 14.11]},\r\n{\"key\":10,\"vals\":[22.36, 178.69, 8.04, 14.11]},\r\n{\"key\":11,\"vals\":[22.46, 17.69, 8.04, 14.11]},\r\n{\"key\":12,\"vals\":[22.56, 17.69, 8.04, 14.11]},\r\n{\"key\":13,\"vals\":[22.66, 17.69, 8.04, 14.11]},\r\n{\"key\":14,\"vals\":[22.76, 17.69, 8.04, 14.11]},\r\n{\"key\":15,\"vals\":[22.86, 17.69, 8.04, 14.11]}]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/detect/multivariate?debug=true&sensitivity_score=5&max_fraction_anomalies=0.15&n_neighbors=5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"detect",
+								"multivariate"
+							],
+							"query": [
+								{
+									"key": "debug",
+									"value": "true"
+								},
+								{
+									"key": "sensitivity_score",
+									"value": "5"
+								},
+								{
+									"key": "max_fraction_anomalies",
+									"value": "0.15"
+								},
+								{
+									"key": "n_neighbors",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ch10 - Multivariate - Debug - Three Outliers, 2S1L - Two Recorded",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200: \" + pm.response.code, function () { pm.expect(pm.response.code).to.eql(200); });\r",
+									"pm.test(\"Response time is acceptable (range 5ms to 7000ms): \" + pm.response.responseTime + \"ms\", function () { pm.expect(_.inRange(pm.response.responseTime, 5, 7000)).to.eql(true); });\r",
+									"var body = JSON.parse(responseBody);\r",
+									"pm.test(\"Number of items returned is correct (eq 15): \" + body[\"anomalies\"].length, function () { pm.expect(body[\"anomalies\"].length).to.eql(15); });\r",
+									"pm.test(\"Debugging is enabled (debug_details exists):  \" + body[\"debug_details\"], function () { pm.expect(body[\"debug_details\"].exist); });\r",
+									"pm.test(\"Count of anomalies is correct (eq 2)\", () => {\r",
+									"    let anomalies = body[\"anomalies\"].filter(a => a.is_anomaly === true);\r",
+									"    pm.expect(anomalies.length).to.eql(2);\r",
+									"} );"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[{\"key\":1,\"vals\":[22.46, 17.69, 8.04, 14.11]},\r\n{\"key\":2,\"vals\":[22.56, 17.69, 8.04, 14.11]},\r\n{\"key\":3,\"vals\":[22.66, 17.69, 8.04, 14.11]},\r\n{\"key\":4,\"vals\":[22.76, 17.69, 8.04, 14.11]},\r\n{\"key\":5,\"vals\":[22.896, 17.69, 8.04, 14.11]},\r\n{\"key\":6,\"vals\":[22.9, 22.69, 8.04, 14.11]},\r\n{\"key\":7,\"vals\":[22.06, 17.69, 8.04, 14.11]},\r\n{\"key\":8,\"vals\":[22.16, 17.69, 9.15, 14.11]},\r\n{\"key\":9,\"vals\":[22.26, 17.69, 8.04, 14.11]},\r\n{\"key\":10,\"vals\":[22.36, 178.69, 8.04, 14.11]},\r\n{\"key\":11,\"vals\":[22.46, 17.69, 8.04, 14.11]},\r\n{\"key\":12,\"vals\":[22.56, 17.69, 8.04, 14.11]},\r\n{\"key\":13,\"vals\":[22.66, 17.69, 8.04, 14.11]},\r\n{\"key\":14,\"vals\":[22.76, 17.69, 8.04, 14.11]},\r\n{\"key\":15,\"vals\":[22.86, 17.69, 8.04, 14.11]}]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/detect/multivariate?debug=true&sensitivity_score=5&max_fraction_anomalies=0.3&n_neighbors=5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"detect",
+								"multivariate"
+							],
+							"query": [
+								{
+									"key": "debug",
+									"value": "true"
+								},
+								{
+									"key": "sensitivity_score",
+									"value": "5"
+								},
+								{
+									"key": "max_fraction_anomalies",
+									"value": "0.3"
+								},
+								{
+									"key": "n_neighbors",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
