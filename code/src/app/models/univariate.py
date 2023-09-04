@@ -369,7 +369,7 @@ def check_gaussian_mixture(col, best_fit_cluster_count):
     # That will create a list per data point.
     X = np.array(col).reshape(-1,1)
     gm_model = GaussianMixture(n_components = best_fit_cluster_count, random_state = 0, max_iter = 250, covariance_type='full').fit(X)
-    xdf = pd.DataFrame(X, columns={"value"})
+    xdf = pd.DataFrame(X, columns=["value"])
     xdf["grp"] = list(gm_model.predict(X))
     xdf["score"] = list(gm_model.score_samples(X))
     # Clusters containing less than 5% of data will be marked as outliers.

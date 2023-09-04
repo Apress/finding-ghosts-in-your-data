@@ -11,7 +11,7 @@ import pytest
 ])
 def test_detect_univariate_statistical_returns_correct_number_of_rows(df_input):
     # Arrange
-    df = pd.DataFrame(df_input, columns={"value"})
+    df = pd.DataFrame(df_input, columns=["value"])
     sensitivity_score = 50
     max_fraction_anomalies = 0.20
     # Act
@@ -28,7 +28,7 @@ def test_detect_univariate_statistical_returns_correct_number_of_rows(df_input):
 ])
 def test_detect_univariate_statistical_returns_single_anomaly(df_input):
     # Arrange
-    df = pd.DataFrame(df_input, columns={"value"})
+    df = pd.DataFrame(df_input, columns=["value"])
     sensitivity_score = 50
     max_fraction_anomalies = 0.50
     # Act
@@ -46,7 +46,7 @@ def test_detect_univariate_statistical_returns_single_anomaly(df_input):
 ])
 def test_detect_univariate_statistical_returns_two_anomalies(df_input):
     # Arrange
-    df = pd.DataFrame(df_input, columns={"value"})
+    df = pd.DataFrame(df_input, columns=["value"])
     sensitivity_score = 50
     max_fraction_anomalies = 0.50
     # Act
@@ -61,7 +61,7 @@ def test_detect_univariate_statistical_returns_two_anomalies(df_input):
 ])
 def test_detect_univariate_statistical_returns_zero_anomalies(df_input):
     # Arrange
-    df = pd.DataFrame(df_input, columns={"value"})
+    df = pd.DataFrame(df_input, columns=["value"])
     sensitivity_score = 30
     max_fraction_anomalies = 0.50
     # Act
@@ -82,7 +82,7 @@ anomalous_sample = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 7, 8, 9, 10, 2550, 9000]
 ])
 def test_detect_univariate_statistical_sensitivity_affects_anomaly_count(df_input, sensitivity_score, number_of_anomalies):
     # Arrange
-    df = pd.DataFrame(df_input, columns={"value"})
+    df = pd.DataFrame(df_input, columns=["value"])
     max_fraction_anomalies = 1.0
     # Act
     (df_out, weights, details) = detect_univariate_statistical(df, sensitivity_score, max_fraction_anomalies)
@@ -106,7 +106,7 @@ def test_detect_univariate_statistical_sensitivity_affects_anomaly_count(df_inpu
 ])
 def test_detect_univariate_statistical_max_fraction_anomalies_affects_anomaly_count(df_input, max_fraction_anomalies, number_of_anomalies):
     # Arrange
-    df = pd.DataFrame(df_input, columns={"value"})
+    df = pd.DataFrame(df_input, columns=["value"])
     sensitivity_score = 100.0
     # Act
     (df_out, weights, details) = detect_univariate_statistical(df, sensitivity_score, max_fraction_anomalies)
@@ -217,7 +217,7 @@ def test_normalization_call_returns_expected_results(df_input, function, expecte
 ])
 def test_normalization_call_returns_expected_results(df_input, function, expected_normal):
     # Arrange
-    df = pd.DataFrame(df_input, columns={"value"})
+    df = pd.DataFrame(df_input, columns=["value"])
     col = df['value']
     # Act
     (is_normal, result_str) = function(col)
@@ -237,7 +237,7 @@ def test_normalization_call_returns_expected_results(df_input, function, expecte
 ])
 def test_perform_normalization_only_works_on_valid_datasets(df_input, should_normalize):
     # Arrange
-    df = pd.DataFrame(df_input, columns={"value"})
+    df = pd.DataFrame(df_input, columns=["value"])
     base_calculations = perform_statistical_calculations(df['value'])
     # Act
     (did_normalize, fitted_data, normalization_diagnostics) = perform_normalization(base_calculations, df)
@@ -288,7 +288,7 @@ normal_with_negatives = [3.86094301, -17.6370525, 4.67057423, -9.43551162, -12.8
 ])
 def test_normalization_required_for_certain_tests(df_input, test_name, test_should_run):
     # Arrange
-    df = pd.DataFrame(df_input, columns={"value"})
+    df = pd.DataFrame(df_input, columns=["value"])
     # Act
     (df_tested, tests_run, diagnostics) = run_tests(df)
     # Assert:  the distribution is/is not normal, based on our expectations.
@@ -308,7 +308,7 @@ def test_normalization_required_for_certain_tests(df_input, test_name, test_shou
 ])
 def test_detect_univariate_statistical_multi_cluster(df_input, number_of_anomalies):
     # Arrange
-    df = pd.DataFrame(df_input, columns={"value"})
+    df = pd.DataFrame(df_input, columns=["value"])
     sensitivity_score = 50.0
     max_fraction_anomalies = 1.0
     # Act

@@ -113,3 +113,39 @@ def detect_univariate_statistical(
 ```
 
 Thanks to:  Andy Huber.
+
+### Listing 7-12
+
+The print copy of Listing 7-12 is missing a line at the end of the `run_tests(df)` function.  The corrected version is as follows:
+
+```python
+if (use_fitted_results):
+  df['fitted_value'] = fitted_data
+  col = df['fitted_value']
+  c = perform_statistical_calculations(col)
+  diagnostics["Fitted calculations"] = c
+
+  if (b['len'] >= 7):
+    df['grubbs'] = check_grubbs(col)
+    tests_run['grubbs'] = 1
+  else:
+    diagnostics["Grubbs' Test"] = f"Did not run Grubbs' test because we need at least 7 observations but only had {b['len']}."
+
+  if (b['len'] >= 3 and b['len'] <= 25):
+    df['dixon'] = check_dixon(col)
+    tests_run['dixon'] = 1
+  else:
+    diagnostics["Dixon's Q Test"] = f"Did not run Dixon's Q test because we need between 3 and 25 observations but had {b['len']}."
+
+  if (b['len'] >= 15):
+    max_num_outliers = math.floor(b['len'] / 3)
+    df['gesd'] = check_gesd(col, max_num_outliers)
+    tests_run['gesd'] = 1
+else:
+  diagnostics["Extended tests"] = "Did not run extended tests because the dataset was not normal and could not be normalized."
+
+diagnostics["Tests Run"] = tests_run
+
+```
+
+Thanks to:  Andy Huber.
