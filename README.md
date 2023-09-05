@@ -62,6 +62,22 @@ The [Postman](https://www.postman.com/) application will allow you to run all of
 
 In the Postman app, select the "Import" button and select the appropriate file to import all integration tests.  Note that there are no environment settings for these tests and they assume that you are running the API on port 80.
 
+## Streamlit Dashboard
+
+The Streamlit dashboard is located in `\code\src\web\` and you can kick it off by running the following command, assuming you have Streamlit installed:
+
+```python
+streamlit run site.py
+```
+
+Note that you may need to run the following command instead:
+
+```python
+python -m streamlit run site.py
+```
+
+Also, if you are using the Docker container to run the API, you should run this command outside of that Docker container, as it is a separate service.
+
 ## Errata
 
 This section is dedicated to any book errata.  This may include any errors at the time of publication or notes about code changes after release to deal with outdated packages or other issues.
@@ -149,3 +165,47 @@ diagnostics["Tests Run"] = tests_run
 ```
 
 Thanks to:  Andy Huber.
+
+## Code Updates
+
+Over time, changes in Python libraries will necessarily affect the code in this book.  Because Python libraries tend not to focus strongly on backwards compatibility, things which worked at the time of the book's release may now generate errors.  This section details some of these changes.
+
+### Defining Column Names as a Set
+
+In `src\app\models\univariate.py` and `test\test_univariate.py`, I used a definition of a single-column DataFrame which is no longer valid as of recent versions of Pandas.  The old version of the code is:
+
+```python
+xdf = pd.DataFrame(X, columns={"value"})
+```
+
+The fix for this is to define the columns as a list rather than a set.
+
+```python
+xdf = pd.DataFrame(X, columns=["value"])
+```
+
+Thanks to:  Andy Huber.
+
+### FastAPI and String Inputs
+
+At the time of publication, FastAPI supported implicit conversion from numeric inputs to string inputs, and so many of the examples in the book use numeric keys rather than explicit strings.  This now returns a `422 Unprocessable Content` response because the input is not in the correct format.  In order to fix this, I have changed all of the inputs in the code base to have string keys.  An example of this is in `src\web\site.py` in the multivariate example.  The old version looked like:
+
+```python
+starting_data_set = """[
+        {"key":1,"vals":[22.46, 17.69, 8.04, 14.11]},
+        {"key":2,"vals":[22.56, 17.69, 8.04, 14.11]},
+        {"key":3,"vals":[22.66, 17.69, 8.04, 14.11]},
+        # Remaining items removed for brevity
+    ]"""
+```
+
+The corrected version now looks like:
+
+```python
+starting_data_set = """[
+        {"key":"1","vals":[22.46, 17.69, 8.04, 14.11]},
+        {"key":"2","vals":[22.56, 17.69, 8.04, 14.11]},
+        {"key":"3","vals":[22.66, 17.69, 8.04, 14.11]},
+        # Remaining items removed for brevity
+    ]"""
+```
