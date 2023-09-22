@@ -1,0 +1,113 @@
+{
+	"info": {
+		"_postman_id": "40a4e882-a53d-4e0f-a2c9-837576a55fc5",
+		"name": "Finding Ghosts in Your Data - CH04",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8748848"
+	},
+	"item": [
+		{
+			"name": "Ch04",
+			"item": [
+				{
+					"name": "Ch04 - Univariate - Debug",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200: \" + pm.response.code, function () { pm.expect(pm.response.code).to.eql(200); });\r",
+									"pm.test(\"Response time is acceptable (range 3ms to 7000ms): \" + pm.response.responseTime + \"ms\", function () { pm.expect(_.inRange(pm.response.responseTime, 3, 7000)).to.eql(true); });\r",
+									"var body = JSON.parse(responseBody);\r",
+									"pm.test(\"Number of items returned is correct (eq 2): \" + body[\"anomalies\"].length, function () { pm.expect(body[\"anomalies\"].length).to.eql(2); });\r",
+									"pm.test(\"Debugging is enabled (debug_details exists):  \" + body[\"debug_details\"], function () { pm.expect(body[\"debug_details\"].exist); });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n{\"key\": \"string\",\"value\": 0},\r\n{\"key\": \"something\", \"value\": 0.37}\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/detect/univariate?debug=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"detect",
+								"univariate"
+							],
+							"query": [
+								{
+									"key": "debug",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ch04 - Univariate - NoDebug",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200: \" + pm.response.code, function () { pm.expect(pm.response.code).to.eql(200); });\r",
+									"pm.test(\"Response time is acceptable (range 3ms to 7000ms): \" + pm.response.responseTime + \"ms\", function () { pm.expect(_.inRange(pm.response.responseTime, 3, 7000)).to.eql(true); });\r",
+									"var body = JSON.parse(responseBody);\r",
+									"pm.test(\"Number of items returned is correct (eq 2): \" + body[\"anomalies\"].length, function () { pm.expect(body[\"anomalies\"].length).to.eql(2); });\r",
+									"pm.test(\"Debugging is not enabled (debug_details does not exist).\", function () { pm.expect(body[\"debug_details\"]).undefined; });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n{\"key\": \"string\",\"value\": 0},\r\n{\"key\": \"something\", \"value\": 0.37}\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/detect/univariate?debug=false",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"detect",
+								"univariate"
+							],
+							"query": [
+								{
+									"key": "debug",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
