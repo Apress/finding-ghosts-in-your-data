@@ -31,17 +31,17 @@ def convert_univariate_list_to_json(univariate_str):
 @st.cache_data
 def convert_multivariate_list_to_json(multivariate_str):
     mv_ast = ast.literal_eval(multivariate_str)
-    return json.dumps([{"key": k, "vals": float(v)} for idx,[k,v] in enumerate(mv_ast)])
+    return json.dumps([{"key": k, "vals": v} for idx,[k,v] in enumerate(mv_ast)])
 
 @st.cache_data
 def convert_single_time_series_list_to_json(time_series_str):
     mv_ast = ast.literal_eval(time_series_str)
-    return json.dumps([{"key": k, "dt":dt, "value": float(v)} for idx,[k,dt,v] in enumerate(mv_ast)])
+    return json.dumps([{"key": k, "dt":dt, "value": v} for idx,[k,dt,v] in enumerate(mv_ast)])
 
 @st.cache_data
 def convert_multi_time_series_list_to_json(time_series_str):
     mv_ast = ast.literal_eval(time_series_str)
-    return json.dumps([{"key": k, "series_key":sk, "dt":dt, "value": float(v)} for idx,[k,sk,dt,v] in enumerate(mv_ast)])
+    return json.dumps([{"key": k, "series_key":sk, "dt":dt, "value": v} for idx,[k,sk,dt,v] in enumerate(mv_ast)])
 
 def main():
     st.write(
