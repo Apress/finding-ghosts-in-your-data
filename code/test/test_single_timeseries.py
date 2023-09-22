@@ -1,5 +1,4 @@
 from numpy import number
-from app.models.single_timeseries import detect_single_timeseries
 from src.app.models.single_timeseries import *
 import pandas as pd
 import pytest
