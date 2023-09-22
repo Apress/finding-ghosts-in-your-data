@@ -1,5 +1,4 @@
 from numpy import number
-from app.models.multi_timeseries import detect_multi_timeseries
 from src.app.models.multi_timeseries import *
 import pandas as pd
 import pytest
