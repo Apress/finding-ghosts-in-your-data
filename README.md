@@ -18,6 +18,8 @@ And should you wish instead to see how the completed version of the app works, m
 uvicorn app_complete.main:app --host 0.0.0.0 --port 80
 ```
 
+**NOTE:** If you are running this on Linux, you will want to use `sudo` to ensure that you can launch a service on port 80. You can also change the port to a vale over 5000 if you wish to run the command locally, though do note that the integration tests and website expect you to host the website on port 80, and so they would need to be changed to support other ports.
+
 Should you wish to deploy the completed version as a Docker container, you can edit the `Dockerfile` to copy `./src/app_complete` instead of `./src/app`, though leave the destination directory alone.
 
 If you are proficient with Docker, you may also wish to build one image based on the completed code and tag it separately:
@@ -36,7 +38,7 @@ This will allow you to compare how your service behaves compared to the version 
 
 ## Try the Completed Product
 
-If you simply want to run the completed product, execute the following command inside the `code` directory:
+If you simply want to run the completed product, execute the following command inside the `code\src` directory:
 
 ```python
 uvicorn app.main:app --host 0.0.0.0 --port 80
